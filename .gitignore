@@ -8,3 +8,4 @@ config.yml
 *.swo
 .DS_Store
 src/client-example-kobald.ts
+.vscode
