@@ -1,0 +1,24 @@
+# simple api key for our server
+server:
+  api:
+    key: YOUR_SERVER_API_KEY_HERE
+  # Log level: 'info' or 'debug' (debug logs complete requests/responses)
+  logLevel: info
+
+
+provider:
+# here we setup configurations for different LLM providers
+  ollama:
+    # the actual class to use
+    class: ollamacloud
+    # default model to use if not specified in request
+    defaultModel: qwen3-coder:480b-cloud
+    api:
+      # use round robin to select the key for each request
+      keys:
+        - YOUR_OLLAMA_API_KEY_1
+        - YOUR_OLLAMA_API_KEY_2
+        - YOUR_OLLAMA_API_KEY_3
+
+
+

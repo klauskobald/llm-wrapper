@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"   # <- increased for LLM requests with tools/long contexts
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+
+  name: llm-wrapper-ingress
+  namespace: cloud-kobald
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: llm-wrapper.cloud.kobald.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: llm-wrapper-service
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - llm-wrapper.cloud.kobald.com
+    secretName: letsencrypt-prod-llm-wrapper-key

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-wrapper
+  namespace: cloud-kobald
+  labels:
+    app: llm-wrapper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-wrapper
+  template:
+    metadata:
+      labels:
+        app: llm-wrapper
+    spec:
+      containers:
+      - name: llm-wrapper
+        image: node:18-alpine
+        command: ["/bin/sh"]
+        args: ["-c", "cd /app && npm install --no-audit --no-fund && npm start"]
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            cpu: 50m
+            memory: 256Mi
+          limits:
+            cpu: 100m
+            memory: 512Mi
+        volumeMounts:
+        - name: app-data
+          mountPath: /app
+        - name: node-modules
+          mountPath: /app/node_modules
+      volumes:
+      - name: app-data
+        persistentVolumeClaim:
+          claimName: llm-wrapper-pvc
+      - name: node-modules
+        emptyDir: {}

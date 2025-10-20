@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: llm-wrapper-service
+  namespace: llm-wrapper
+  labels:
+    app: llm-wrapper
+spec:
+  selector:
+    app: llm-wrapper
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+  type: ClusterIP
