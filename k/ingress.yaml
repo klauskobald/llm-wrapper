@@ -4,12 +4,11 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/proxy-body-size: "50m"   # <- increased for LLM requests with tools/long contexts
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m"   # <- increased for LLM requests with tools/long contexts
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
 
   name: llm-wrapper-ingress
-  namespace: cloud-kobald
 spec:
   ingressClassName: nginx
   rules:

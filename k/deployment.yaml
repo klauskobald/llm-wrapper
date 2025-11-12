@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: llm-wrapper
-  namespace: cloud-kobald
   labels:
     app: llm-wrapper
 spec:
