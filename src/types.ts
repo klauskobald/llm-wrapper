@@ -14,6 +14,7 @@ export interface Config {
         [key: string]: {
             class: string;
             defaultModel?: string;
+            host?: string;
             api: {
                 keys: string[];
             };

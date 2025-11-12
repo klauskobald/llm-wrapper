@@ -11,9 +11,9 @@ const userPrompt = fs.readFileSync("src/client-test-prompt.txt", "utf8")
 const run = async () => {
 
     const response = await client.send({
-        provider: "ollama",
+        provider: "kimi",
         // model: "gpt-oss:20b-cloud",
-        model: "qwen3-coder:480b-cloud",
+        model: "",
         messages: [{
             role: "user",
             content: userPrompt

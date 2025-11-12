@@ -39,7 +39,7 @@ export class ProviderManager {
             const logLevel = this.config.server.logLevel || 'info';
 
             // Instantiate the provider with its configuration and log level
-            const provider = new ProviderClass(providerConfig.api.keys, logLevel);
+            const provider = new ProviderClass(providerConfig.api.keys, providerConfig.host || null, logLevel);
             this.providers.set(providerName, provider);
 
             console.log(`[ProviderManager] Loaded provider: ${providerName} (${providerConfig.class})`);

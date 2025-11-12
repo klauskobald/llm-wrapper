@@ -6,7 +6,7 @@ export abstract class BaseProvider implements Provider {
     protected keyRotator: KeyRotator;
     protected logLevel: 'info' | 'debug';
 
-    constructor(apiKeys: string[], logLevel: 'info' | 'debug' = 'info') {
+    constructor(apiKeys: string[], protected host: string | null = null, logLevel: 'info' | 'debug' = 'info') {
         this.keyRotator = new KeyRotator(apiKeys);
         this.logLevel = logLevel;
         console.log(`[${this.constructor.name}] Provider instance created with ${apiKeys.length} API keys (logLevel: ${logLevel})`);

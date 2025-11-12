@@ -2,7 +2,7 @@ import { Ollama } from 'ollama';
 import { BaseProvider } from './BaseProvider';
 
 export default class OllamaCloudProvider extends BaseProvider {
-    constructor(apiKeys: string[], logLevel: 'info' | 'debug' = 'info') {
+    constructor(apiKeys: string[], protected host: string, logLevel: 'info' | 'debug' = 'info') {
         super(apiKeys, logLevel);
     }
 
@@ -10,7 +10,7 @@ export default class OllamaCloudProvider extends BaseProvider {
         try {
             // Create a new Ollama instance for each request with the current API key
             const ollama = new Ollama({
-                host: 'https://ollama.com',
+                host: this.host || 'https://ollama.com',
                 headers: {
                     'Authorization': `Bearer ${apiKey}`
                 }
